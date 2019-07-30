@@ -83,23 +83,23 @@ public:
 
 	// Get an integer value
 	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, int& val, int base=DEC) const;
+				  char* buffer, size_t len, int& val, int base=0) const;
 
 	// Get a uint8_t value
 	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, uint8_t& val, int base=DEC) const;
+				  char* buffer, size_t len, uint8_t& val, int base=0) const;
 
 	// Get a uint16_t value
 	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, uint16_t& val, int base=DEC) const;
+				  char* buffer, size_t len, uint16_t& val, int base=0) const;
 
 	// Get a long value
 	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, long& val, int base=DEC) const;
+				  char* buffer, size_t len, long& val, int base=0) const;
 
 	//get unsigned long value
 	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, unsigned long& val, int base=DEC) const;
+				  char* buffer, size_t len, unsigned long& val, int base=0) const;
 
     // Get a double value
     bool getValue(const char* section, const char* key,
