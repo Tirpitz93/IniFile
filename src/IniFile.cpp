@@ -135,17 +135,23 @@ bool IniFile::getValue(const char* section, const char* key,
 }
 
 bool IniFile::getValue(const char* section, const char* key,
-					   char* buffer, size_t len, int& val) const
+					   char* buffer, size_t len, int& val, int base) const
+/*
+ * Long INT (base for other integer functions)
+ */
 {
 	if (!getValue(section, key, buffer, len))
 		return false; // error
 
-	val = atoi(buffer);
+	val = int(strtol(buffer, NULL, base));
 	return true;
 }
 
 bool IniFile::getValue(const char* section, const char* key,
 					   char* buffer, size_t len, double& val) const
+/*
+ * Double float
+ */
 {
 	if (!getValue(section, key, buffer, len))
 		return false; // error
@@ -154,44 +160,70 @@ bool IniFile::getValue(const char* section, const char* key,
 	return true;
 }
 
-bool IniFile::getValue(const char* section, const char* key,
-					   char* buffer, size_t len, uint8_t& val) const
+bool IniFile::getValue(const char* section,
+					   const char* key,
+					   char* buffer,
+					   size_t len,
+					   uint8_t& val,
+					   int base
+) const
+/*
+ * UINT8_t convert
+ */
 {
 	long longval;
-	bool r = getValue(section, key, buffer, len, longval);
+	bool r = getValue(section, key, buffer, len, longval, base);
 	if (r)
 		val = uint8_t(longval);
 	return r;
 }
 
-bool IniFile::getValue(const char* section, const char* key,
-					   char* buffer, size_t len, uint16_t& val) const
+bool IniFile::getValue(const char* section,
+					   const char* key,
+					   char* buffer,
+					   size_t len,
+					   uint16_t& val,
+					   int base) const
+/*
+ * UNIT16_T
+ */
 {
 	long longval;
-	bool r = getValue(section, key, buffer, len, longval);
+	bool r = getValue(section, key, buffer, len, longval, base);
 	if (r)
 		val = uint16_t(longval);
 	return r;
 }
 
-bool IniFile::getValue(const char* section, const char* key,
-					   char* buffer, size_t len, long& val) const
+bool IniFile::getValue(const char* section,
+					   const char* key,
+					   char* buffer,
+					   size_t len,
+					   long& val,
+					   int base) const
+/*
+ * LONG INT
+ */
 {
 	if (!getValue(section, key, buffer, len))
 		return false; // error
 
-	val = atol(buffer);
+	val = strtol(buffer, NULL, base);
+
 	return true;
 }
 
 bool IniFile::getValue(const char* section, const char* key,
-					   char* buffer, size_t len, unsigned long& val) const
+					   char* buffer, size_t len, unsigned long& val, int base) const
+/*
+ * Unsigned long int
+ */
 {
 	if (!getValue(section, key, buffer, len))
 		return false; // error
 
 	char *endptr;
-	unsigned long tmp = strtoul(buffer, &endptr, 10);
+	unsigned long tmp = strtoul(buffer, &endptr, base);
 	if (endptr == buffer)
 		return false; // no conversion
 	if (*endptr == '\0') {

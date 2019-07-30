@@ -83,28 +83,30 @@ public:
 
 	// Get an integer value
 	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, int& val) const;
-				  
-	// Get a double value
-	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, double& val) const;
+				  char* buffer, size_t len, int& val, int base=DEC) const;
 
 	// Get a uint8_t value
 	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, uint8_t& val) const;
+				  char* buffer, size_t len, uint8_t& val, int base=DEC) const;
 
 	// Get a uint16_t value
 	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, uint16_t& val) const;
+				  char* buffer, size_t len, uint16_t& val, int base=DEC) const;
 
 	// Get a long value
 	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, long& val) const;
+				  char* buffer, size_t len, long& val, int base=DEC) const;
 
+	//get unsigned long value
 	bool getValue(const char* section, const char* key,
-				  char* buffer, size_t len, unsigned long& val) const;
+				  char* buffer, size_t len, unsigned long& val, int base=DEC) const;
 
-	// Get a float value
+    // Get a double value
+    bool getValue(const char* section, const char* key,
+                  char* buffer, size_t len, double& val) const;
+
+
+    // Get a float value
 	bool getValue(const char* section, const char* key,
 				  char* buffer, size_t len, float& val) const;
 
@@ -199,8 +201,8 @@ public:
 
 private:
 	enum {funcUnset = 0,
-		  funcFindSection,
-		  funcFindKey,
+		funcFindSection,
+		funcFindKey,
 	};
 
 	uint32_t readLinePosition;
